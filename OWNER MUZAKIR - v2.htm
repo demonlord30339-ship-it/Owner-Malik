@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>OWNER MUZAKIR</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#1a1d24;
+    --card2:#20242d;
+    --accent:#25D366;
+    --accent2:#1ea952;
+    --text:#f1f3f5;
+    --muted:#9aa0a8;
+    --danger:#e5484d;
+    --border:#2a2e37;
+  }
+  /* ---------- THEMES ---------- */
+  body[data-theme="green"]{ --bg:#0f1115;--card:#1a1d24;--card2:#20242d;--accent:#25D366;--accent2:#1ea952;--text:#f1f3f5;--muted:#9aa0a8;--danger:#e5484d;--border:#2a2e37; }
+  body[data-theme="blue"]{ --bg:#0b1220;--card:#121c30;--card2:#16223a;--accent:#3b82f6;--accent2:#2563eb;--text:#f1f5fb;--muted:#94a3b8;--danger:#f43f5e;--border:#22304a; }
+  body[data-theme="purple"]{ --bg:#15101f;--card:#201733;--card2:#281d40;--accent:#a855f7;--accent2:#9333ea;--text:#f3eefc;--muted:#a99cc2;--danger:#f43f5e;--border:#32264d; }
+  body[data-theme="red"]{ --bg:#1a0e0e;--card:#261414;--card2:#301919;--accent:#ef4444;--accent2:#dc2626;--text:#fcecec;--muted:#bfa1a1;--danger:#f59e0b;--border:#3a1e1e; }
+  body[data-theme="orange"]{ --bg:#1c130a;--card:#2a1c0e;--card2:#352411;--accent:#f97316;--accent2:#ea580c;--text:#fdf1e7;--muted:#c2a98e;--danger:#ef4444;--border:#412c14; }
+  body[data-theme="pink"]{ --bg:#1c0e16;--card:#2a1520;--card2:#351a28;--accent:#ec4899;--accent2:#db2777;--text:#fdeef5;--muted:#c79bb0;--danger:#ef4444;--border:#3f1e30; }
+  body[data-theme="teal"]{ --bg:#0a1716;--card:#102420;--card2:#142e29;--accent:#14b8a6;--accent2:#0d9488;--text:#ebfdf9;--muted:#8fb8b0;--danger:#f43f5e;--border:#1c3a33; }
+  body[data-theme="gold"]{ --bg:#171307;--card:#241e0d;--card2:#2f2710;--accent:#eab308;--accent2:#ca8a04;--text:#fdf8e7;--muted:#c4b78a;--danger:#ef4444;--border:#3a3014; }
+  body[data-theme="dark"]{ --bg:#000000;--card:#121212;--card2:#1a1a1a;--accent:#ffffff;--accent2:#cccccc;--text:#f5f5f5;--muted:#888888;--danger:#ff5555;--border:#2a2a2a; }
+  body[data-theme="light"]{ --bg:#ffffff;--card:#ffffff;--card2:#f6f7f9;--accent:#16a34a;--accent2:#15803d;--text:#111418;--muted:#6b7280;--danger:#dc2626;--border:#e5e7eb; }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+  }
+  .screen{
+    display:none;
+    min-height:100vh;
+    width:100%;
+  }
+  .screen.active{display:flex;flex-direction:column;}
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{
+    background:var(--card);
+    background-image:linear-gradient(135deg, var(--card2), var(--bg));
+    padding:18px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:10;
+  }
+  .topbar .title{
+    font-size:19px;
+    font-weight:700;
+    letter-spacing:0.3px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .topbar .title img{
+    width:34px;height:34px;border-radius:50%;object-fit:cover;
+    border:2px solid var(--accent);
+  }
+  .topbar .ver{
+    font-size:11px;
+    color:var(--muted);
+    background:#0008;
+    padding:4px 9px;
+    border-radius:20px;
+  }
+  .icon-btn{
+    background:transparent;
+    border:none;
+    color:var(--text);
+    font-size:20px;
+    cursor:pointer;
+    padding:6px;
+  }
+
+  /* ---------- LOCK SCREENS ---------- */
+  .lock-wrap{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    text-align:center;
+  }
+  .lock-logo{
+    width:78px;height:78px;
+    border-radius:50%;
+    background:var(--card2);
+    display:flex;align-items:center;justify-content:center;
+    font-size:34px;
+    margin-bottom:18px;
+    border:2px solid var(--accent);
+  }
+  .lock-wrap h2{margin:0 0 6px;font-size:20px;}
+  .lock-wrap p{color:var(--muted);font-size:13px;margin:0 0 22px;}
+  .pin-input{
+    width:100%;
+    max-width:280px;
+    padding:14px;
+    font-size:18px;
+    text-align:center;
+    letter-spacing:6px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    margin-bottom:14px;
+  }
+  .pin-input:focus{outline:none;border-color:var(--accent);}
+  .btn{
+    width:100%;
+    max-width:280px;
+    padding:14px;
+    font-size:15px;
+    font-weight:600;
+    border-radius:12px;
+    border:none;
+    background:var(--accent);
+    color:#06210f;
+    cursor:pointer;
+    transition:transform .1s;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn.secondary{
+    background:var(--card2);
+    color:var(--text);
+    border:1px solid var(--border);
+  }
+  .btn.danger{background:var(--danger);color:#fff;}
+  .error-msg{
+    color:var(--danger);
+    font-size:13px;
+    min-height:18px;
+    margin-bottom:8px;
+  }
+  .small-link{
+    margin-top:18px;
+    color:var(--muted);
+    font-size:12px;
+    text-decoration:underline;
+    cursor:pointer;
+    background:none;
+    border:none;
+  }
+
+  /* ---------- HOME / LIST ---------- */
+  .content{
+    flex:1;
+    padding:14px;
+    overflow-y:auto;
+    padding-bottom:90px;
+  }
+  .update-banner{
+    background:var(--card2);
+    background-image:linear-gradient(135deg, var(--card2), var(--card));
+    border:1px solid var(--accent2);
+    border-radius:14px;
+    padding:14px 16px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:16px;
+    cursor:pointer;
+  }
+  .update-banner .wa-icon{font-size:26px;}
+  .update-banner .txt{flex:1;}
+  .update-banner .txt b{display:block;font-size:14px;}
+  .update-banner .txt span{font-size:12px;color:var(--muted);}
+  .update-banner .go{color:var(--accent);font-size:20px;}
+
+  .search-bar{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:10px 14px;
+    margin-bottom:14px;
+  }
+  .search-bar .search-ic{font-size:15px;color:var(--muted);}
+  .search-bar input{
+    flex:1;
+    border:none;
+    background:transparent;
+    color:var(--text);
+    font-size:14px;
+    outline:none;
+  }
+  .search-bar input::placeholder{color:var(--muted);}
+
+  .category-pills{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    margin-bottom:14px;
+    padding-bottom:2px;
+  }
+  .category-pills::-webkit-scrollbar{display:none;}
+  .pill{
+    flex-shrink:0;
+    padding:7px 16px;
+    border-radius:20px;
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--muted);
+    font-size:12.5px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .pill.active{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:600;}
+
+  .link-tag{
+    display:inline-block;
+    font-size:10.5px;
+    color:var(--accent);
+    background:var(--card2);
+    border:1px solid var(--border);
+    padding:2px 8px;
+    border-radius:10px;
+    margin-top:4px;
+  }
+  .link-actions-mini{display:flex;gap:6px;flex-shrink:0;}
+  .mini-btn{
+    width:30px;height:30px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:var(--card2);
+    color:var(--muted);
+    font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+
+  .link-item{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:12px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+    cursor:pointer;
+    transition:background .15s;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  .link-item:active{background:var(--card2);}
+  .link-item img{
+    width:48px;height:48px;
+    border-radius:10px;
+    object-fit:cover;
+    background:var(--card2);
+    flex-shrink:0;
+  }
+  .link-item .info{flex:1;min-width:0;}
+  .link-item .info b{
+    display:block;font-size:15px;margin-bottom:3px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .link-item .info span{
+    display:block;font-size:12px;color:var(--muted);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .link-item .arrow{color:var(--muted);font-size:18px;flex-shrink:0;}
+
+  .empty-state{
+    text-align:center;
+    color:var(--muted);
+    padding:60px 20px;
+    font-size:14px;
+  }
+  .empty-state .e-icon{font-size:42px;display:block;margin-bottom:12px;}
+
+  /* ---------- BOTTOM NAV ---------- */
+  .bottomnav{
+    position:fixed;
+    bottom:0;left:0;right:0;
+    background:var(--card);
+    border-top:1px solid var(--border);
+    display:flex;
+    padding:8px 0 calc(8px + env(safe-area-inset-bottom));
+    z-index:10;
+  }
+  .nav-btn{
+    flex:1;
+    background:none;border:none;
+    color:var(--muted);
+    display:flex;flex-direction:column;align-items:center;gap:3px;
+    font-size:11px;
+    padding:6px 0;
+    cursor:pointer;
+  }
+  .nav-btn .ic{font-size:20px;}
+  .nav-btn.active{color:var(--accent);}
+
+  /* ---------- ADMIN ---------- */
+  .admin-header{
+    display:flex;align-items:center;gap:12px;
+    padding:18px 16px;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+  }
+  .admin-header img{
+    width:54px;height:54px;border-radius:50%;object-fit:cover;
+    border:2px solid var(--accent);
+    cursor:pointer;
+  }
+  .admin-header .ai{flex:1;}
+  .admin-header .ai b{display:block;font-size:16px;}
+  .admin-header .ai span{font-size:12px;color:var(--muted);}
+
+  .section-title{
+    font-size:13px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    margin:18px 0 10px 4px;
+  }
+  .admin-link-item{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:12px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .admin-link-item img{
+    width:44px;height:44px;border-radius:9px;object-fit:cover;background:var(--card2);
+  }
+  .admin-link-item .info{flex:1;min-width:0;}
+  .admin-link-item .info b{display:block;font-size:14px;}
+  .admin-link-item .info span{display:block;font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .admin-link-item .acts{display:flex;gap:6px;}
+  .icon-action{
+    width:34px;height:34px;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:var(--card2);
+    color:var(--text);
+    cursor:pointer;
+    font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .icon-action.del{color:var(--danger);}
+
+  .field{margin-bottom:12px;text-align:left;}
+  .field label{
+    display:block;font-size:12px;color:var(--muted);margin-bottom:5px;
+  }
+  .field input, .field textarea{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:var(--card2);
+    color:var(--text);
+    font-size:14px;
+  }
+  .field input:focus, .field textarea:focus{outline:none;border-color:var(--accent);}
+  .img-preview-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .img-preview-row img{width:56px;height:56px;border-radius:10px;object-fit:cover;background:var(--card2);}
+
+  .modal-overlay{
+    position:fixed;inset:0;
+    background:#000a;
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:100;
+  }
+  .modal-overlay.active{display:flex;}
+  .modal-box{
+    background:var(--card);
+    border-radius:18px 18px 0 0;
+    padding:20px;
+    width:100%;
+    max-width:480px;
+    max-height:88vh;
+    overflow-y:auto;
+    animation:slideUp .2s ease;
+  }
+  @keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+  .modal-box h3{margin:0 0 16px;font-size:17px;}
+  .modal-actions{display:flex;gap:10px;margin-top:16px;}
+  .modal-actions .btn{margin:0;}
+
+  .toast{
+    position:fixed;
+    bottom:90px;left:50%;
+    transform:translateX(-50%);
+    background:#222;
+    color:#fff;
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:13px;
+    z-index:200;
+    opacity:0;
+    transition:opacity .25s;
+    pointer-events:none;
+  }
+  .toast.show{opacity:1;}
+
+  .settings-row{
+    display:flex;align-items:center;justify-content:space-between;
+    background:var(--card);border:1px solid var(--border);
+    border-radius:14px;padding:14px 16px;margin-bottom:10px;
+    cursor:pointer;
+  }
+  .settings-row .l{display:flex;align-items:center;gap:12px;font-size:14px;}
+  .settings-row .l .ic{font-size:18px;}
+  .settings-row .r{color:var(--muted);font-size:18px;}
+  .switch{
+    width:44px;height:26px;background:var(--border);border-radius:20px;position:relative;cursor:pointer;flex-shrink:0;
+  }
+  .switch.on{background:var(--accent);}
+  .switch::after{
+    content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .15s;
+  }
+  .switch.on::after{left:21px;}
+</style>
+</head>
+<body>
+
+<!-- ================= LOADING SCREEN (checking version) ================= -->
+<div class="screen" id="screen-loading">
+  <div class="lock-wrap">
+    <div class="lock-logo">⏳</div>
+    <h2>Loading...</h2>
+    <p>Check kiya ja raha hai</p>
+  </div>
+</div>
+
+<!-- ================= MAINTENANCE SCREEN ================= -->
+<div class="screen" id="screen-maintenance">
+  <div class="lock-wrap">
+    <div class="lock-logo">🛑</div>
+    <h2>Update Zaroori Hai</h2>
+    <p>Aap purana version use kar rahe hain.<br>Naya version (<b id="maint-required-ver"></b>) install karne ke liye WhatsApp channel join karein.</p>
+    <button class="btn" onclick="openWhatsApp()">📲 WhatsApp Channel Join Karein</button>
+    <button class="small-link" onclick="openAdminEntry()">Admin Login</button>
+  </div>
+</div>
+
+<!-- ================= APP LOCK SETUP (first run) ================= -->
+<div class="screen" id="screen-setup">
+  <div class="lock-wrap">
+    <div class="lock-logo">🔧</div>
+    <h2>OWNER MUZAKIR</h2>
+    <p>Pehli baar setup &mdash; App lock aur Admin password set karein</p>
+
+    <div class="error-msg" id="setup-error"></div>
+
+    <input type="password" inputmode="numeric" class="pin-input" id="setup-applock" placeholder="App Lock PIN (4 digit)" maxlength="8">
+    <input type="password" class="pin-input" id="setup-adminpass" placeholder="Admin Password" maxlength="20" style="letter-spacing:1px;">
+    <input type="password" class="pin-input" id="setup-adminpass2" placeholder="Admin Password confirm karein" maxlength="20" style="letter-spacing:1px;">
+
+    <button class="btn" onclick="completeSetup()">Setup Complete Karein</button>
+  </div>
+</div>
+
+<!-- ================= APP LOCK SCREEN ================= -->
+<div class="screen" id="screen-lock">
+  <div class="lock-wrap">
+    <div class="lock-logo">🔒</div>
+    <h2>App Locked</h2>
+    <p>Jaari rakhne ke liye PIN dalen</p>
+    <div class="error-msg" id="lock-error"></div>
+    <input type="password" inputmode="numeric" class="pin-input" id="lock-pin" placeholder="PIN dalen" maxlength="8">
+    <button class="btn" onclick="checkAppLock()">Unlock</button>
+  </div>
+</div>
+
+<!-- ================= ADMIN LOGIN SCREEN ================= -->
+<div class="screen" id="screen-adminlogin">
+  <div class="topbar">
+    <div class="title">🛠 Admin Login</div>
+    <button class="icon-btn" onclick="goHome()">✕</button>
+  </div>
+  <div class="lock-wrap">
+    <div class="lock-logo">👤</div>
+    <h2>Admin Dashboard</h2>
+    <p>Admin password dalen</p>
+    <div class="error-msg" id="adminlogin-error"></div>
+    <input type="password" class="pin-input" id="adminlogin-pass" placeholder="Admin password" style="letter-spacing:1px;">
+    <button class="btn" onclick="checkAdminLogin()">Login</button>
+  </div>
+</div>
+
+<!-- ================= HOME SCREEN ================= -->
+<div class="screen" id="screen-home">
+  <div class="topbar">
+    <div class="title"><img id="home-admin-pic" src="" style="display:none;"> <span id="home-title">OWNER MUZAKIR</span></div>
+    <span class="ver" id="home-ver">v1.0</span>
+  </div>
+  <div class="content">
+    <div class="update-banner" onclick="openWhatsApp()">
+      <div class="wa-icon">📲</div>
+      <div class="txt">
+        <b>New Update Available</b>
+        <span>WhatsApp group/channel join karein update ke liye</span>
+      </div>
+      <div class="go">›</div>
+    </div>
+    <div id="last-updated-line" style="text-align:center;font-size:11px;color:var(--muted);margin:-6px 0 14px;"></div>
+
+    <div class="search-bar">
+      <span class="search-ic">🔍</span>
+      <input type="text" id="search-input" placeholder="Links mein search karein..." oninput="renderHomeLinks()">
+    </div>
+
+    <div class="category-pills" id="category-pills"></div>
+
+    <div id="links-container"></div>
+    <div class="empty-state" id="empty-state" style="display:none;">
+      <span class="e-icon">📭</span>
+      Koi link abhi add nahi hui<br>Admin dashboard se add karein
+    </div>
+
+    <div style="text-align:center;color:var(--muted);font-size:11.5px;margin-top:24px;padding-bottom:6px;">
+      OWNER MUZAKIR &mdash; <b style="color:var(--accent);">THE GREAT MALIK</b>
+    </div>
+  </div>
+
+  <div class="bottomnav">
+    <button class="nav-btn active" id="nav-home" onclick="goHome()">
+      <span class="ic">🏠</span> Home
+    </button>
+    <button class="nav-btn" onclick="openWhatsApp()">
+      <span class="ic">📲</span> Update
+    </button>
+    <button class="nav-btn" id="nav-admin" onclick="openAdminEntry()">
+      <span class="ic">🛠</span> Admin
+    </button>
+  </div>
+</div>
+
+<!-- ================= ADMIN DASHBOARD ================= -->
+<div class="screen" id="screen-admin">
+  <div class="topbar">
+    <div class="title">🛠 Admin Dashboard</div>
+    <button class="icon-btn" onclick="goHome()">✕</button>
+  </div>
+  <div class="admin-header">
+    <img id="admin-pic-preview" src="" onclick="document.getElementById('admin-pic-file').click()">
+    <input type="file" id="admin-pic-file" accept="image/*" style="display:none;" onchange="handleAdminPicUpload(event)">
+    <div class="ai">
+      <b>OWNER MUZAKIR</b>
+      <span>Tap photo par tap karke admin pic change karein</span>
+    </div>
+  </div>
+
+  <div class="content" style="padding-bottom:30px;">
+    <div class="section-title">Links Management</div>
+    <button class="btn" style="margin-bottom:14px;" onclick="openLinkModal()">+ Naya Link Add Karein</button>
+    <div id="admin-links-container"></div>
+
+    <div class="section-title">App Settings</div>
+
+    <div class="settings-row" onclick="openVersionModal()">
+      <div class="l"><span class="ic">🏷️</span> App Version</div>
+      <div class="r" id="settings-ver-val">v1.0</div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin:-4px 4px 14px;line-height:1.5;">
+      Ye sirf display label hai (home screen par dikhta hai). Purane users ko block karne ke liye file ke andar <b>REQUIRED_VERSION</b> constant ko naye version se update karein aur file dobara upload karein.
+    </p>
+
+    <div class="settings-row" onclick="openWhatsAppLinkModal()">
+      <div class="l"><span class="ic">📲</span> WhatsApp Update Link</div>
+      <div class="r">✎</div>
+    </div>
+
+    <div class="settings-row" onclick="openThemeModal()">
+      <div class="l"><span class="ic">🎨</span> App Theme</div>
+      <div class="r" id="settings-theme-val">Green</div>
+    </div>
+
+    <div class="settings-row" onclick="toggleAppLock()">
+      <div class="l"><span class="ic">🔒</span> App Lock</div>
+      <div class="switch" id="applock-switch"></div>
+    </div>
+
+    <div class="settings-row" onclick="openChangePinModal()">
+      <div class="l"><span class="ic">🔑</span> App Lock PIN Change Karein</div>
+      <div class="r">✎</div>
+    </div>
+
+    <div class="settings-row" onclick="openChangeAdminPassModal()">
+      <div class="l"><span class="ic">👤</span> Admin Password Change Karein</div>
+      <div class="r">✎</div>
+    </div>
+
+    <div class="section-title">User Page Control</div>
+
+    <div class="settings-row" onclick="toggleUserPage()">
+      <div class="l"><span class="ic" id="userpage-ic">🟢</span> User Page <span id="userpage-status" style="color:var(--muted);font-size:11px;margin-left:4px;">(ON)</span></div>
+      <div class="switch" id="userpage-switch"></div>
+    </div>
+    <p style="font-size:11.5px;color:var(--muted);margin:-4px 4px 14px;line-height:1.5;">
+      Jab ye OFF hoga to users ko "App Under Maintenance" page dikhega aur woh links nahi dekh sakenge. Admin Dashboard hamesha aapke liye khula rahega.
+    </p>
+
+    <div class="section-title">Blocked Devices</div>
+    <p style="font-size:11.5px;color:var(--muted);margin:-4px 4px 12px;line-height:1.5;">
+      Note: Ye device-level block hai (browser storage par based), agar user browser cache clear kare to naya device ID ban jayega aur block reset ho jayega. Ye real user-account management nahi hai.
+    </p>
+    <div style="font-size:12px;color:var(--muted);background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:10px;">
+      Aapki is browser ki Device ID: <b id="my-device-id" style="color:var(--text);"></b>
+    </div>
+    <button class="btn secondary" style="margin-bottom:14px;" onclick="openBlockModal()">+ Device ID Block Karein</button>
+    <div id="blocked-list-container"></div>
+
+    <div class="section-title">Danger Zone</div>
+    <div class="settings-row" onclick="confirmResetApp()">
+      <div class="l" style="color:var(--danger);"><span class="ic">⚠️</span> Sab Data Reset Karein</div>
+      <div class="r">›</div>
+    </div>
+
+    <div class="section-title">About / License</div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px;text-align:center;">
+      <div style="font-size:13px;color:var(--muted);margin-bottom:4px;">OWNER MUZAKIR &copy; <span id="about-year"></span></div>
+      <div style="font-size:17px;font-weight:700;letter-spacing:0.5px;color:var(--accent);">THE GREAT MALIK</div>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:6px;">All rights reserved.</div>
+    </div>
+
+    <button class="btn secondary" style="margin-top:18px;" onclick="adminLogout()">Admin Logout</button>
+  </div>
+</div>
+
+<!-- ================= MODALS ================= -->
+<div class="modal-overlay" id="modal-link">
+  <div class="modal-box">
+    <h3 id="link-modal-title">Naya Link Add Karein</h3>
+    <div class="img-preview-row">
+      <img id="link-img-preview" src="">
+      <button class="btn secondary" style="margin:0;" onclick="document.getElementById('link-img-file').click()">Picture Choose Karein</button>
+      <input type="file" id="link-img-file" accept="image/*" style="display:none;" onchange="handleLinkImgUpload(event)">
+    </div>
+    <div class="field">
+      <label>Title / Naam</label>
+      <input type="text" id="link-title-input" placeholder="Jaise: Free Fire Diamond Top-up">
+    </div>
+    <div class="field">
+      <label>Link / URL</label>
+      <input type="text" id="link-url-input" placeholder="https://...">
+    </div>
+    <div class="field">
+      <label>Category (optional)</label>
+      <input type="text" id="link-category-input" placeholder="Jaise: Games, Apps, Tools">
+    </div>
+    <div class="error-msg" id="link-modal-error"></div>
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeModal('modal-link')">Cancel</button>
+      <button class="btn" onclick="saveLink()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-version">
+  <div class="modal-box">
+    <h3>App Version Update Karein</h3>
+    <div class="field">
+      <label>Version Number</label>
+      <input type="text" id="version-input" placeholder="Jaise: v1.1">
+    </div>
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeModal('modal-version')">Cancel</button>
+      <button class="btn" onclick="saveVersion()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-wa">
+  <div class="modal-box">
+    <h3>WhatsApp Group/Channel Link</h3>
+    <div class="field">
+      <label>WhatsApp Link</label>
+      <input type="text" id="wa-input" placeholder="https://chat.whatsapp.com/...">
+    </div>
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeModal('modal-wa')">Cancel</button>
+      <button class="btn" onclick="saveWhatsApp()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-pin">
+  <div class="modal-box">
+    <h3>App Lock PIN Change Karein</h3>
+    <div class="field">
+      <label>Naya PIN</label>
+      <input type="password" inputmode="numeric" id="newpin-input" placeholder="Naya PIN" maxlength="8">
+    </div>
+    <div class="error-msg" id="pin-modal-error"></div>
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeModal('modal-pin')">Cancel</button>
+      <button class="btn" onclick="saveNewPin()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-adminpass">
+  <div class="modal-box">
+    <h3>Admin Password Change Karein</h3>
+    <div class="field">
+      <label>Naya Admin Password</label>
+      <input type="password" id="newadminpass-input" placeholder="Naya password" maxlength="20">
+    </div>
+    <div class="error-msg" id="adminpass-modal-error"></div>
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeModal('modal-adminpass')">Cancel</button>
+      <button class="btn" onclick="saveNewAdminPass()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-confirm-delete">
+  <div class="modal-box">
+    <h3>Ye link delete karna hai?</h3>
+    <p style="color:var(--muted);font-size:13px;margin-top:-8px;">Ye action wapas nahi ho sakta.</p>
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeModal('modal-confirm-delete')">Cancel</button>
+      <button class="btn danger" onclick="confirmDeleteLink()">Delete Karein</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-confirm-reset">
+  <div class="modal-box">
+    <h3>Sab data reset karna hai?</h3>
+    <p style="color:var(--muted);font-size:13px;margin-top:-8px;">Ye sab links, pics aur settings hamesha ke liye delete kar dega. App phir se setup karna hoga.</p>
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeModal('modal-confirm-reset')">Cancel</button>
+      <button class="btn danger" onclick="resetApp()">Sab Reset Karein</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-theme">
+  <div class="modal-box">
+    <h3>Theme Choose Karein</h3>
+    <div id="theme-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;"></div>
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeModal('modal-theme')">Band Karein</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-block">
+  <div class="modal-box">
+    <h3>Device Block Karein</h3>
+    <div class="field">
+      <label>Device ID</label>
+      <input type="text" id="block-id-input" placeholder="Device ID paste karein">
+    </div>
+    <div class="error-msg" id="block-modal-error"></div>
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeModal('modal-block')">Cancel</button>
+      <button class="btn danger" onclick="saveBlockDevice()">Block Karein</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===================== STORAGE KEYS ===================== */
+/* Ye file ka apna version hai. Jab bhi naya version file upload karein,
+   is value ko badal dein (e.g. 'v2.0'). Jis user ke localStorage mein
+   purana version hoga, uska app khud ba khud "Update Required" screen
+   dikhayega aur aage nahi jaane dega. */
+const REQUIRED_VERSION = 'v2.0';
+
+/* Online version check - GitHub par jo version.txt hai usse compare hota hai.
+   Jab bhi naya version release karna ho, sirf GitHub par version.txt edit
+   karein (file dobara bhejne ki zaroorat nahi) - purane users khud block
+   ho jayenge agle baar app khulne par. */
+const VERSION_CHECK_URL = 'https://raw.githubusercontent.com/demonlord30339-ship-it/Owner-Malik/main/version.txt';
+
+const SK = {
+  setupDone:'om_setup_done',
+  appLockPin:'om_app_pin',
+  appLockEnabled:'om_app_lock_enabled',
+  adminPass:'om_admin_pass',
+  adminPic:'om_admin_pic',
+  version:'om_version',
+  waLink:'om_wa_link',
+  links:'om_links',
+  theme:'om_theme',
+  userPageOn:'om_userpage_on',
+  deviceId:'om_device_id',
+  blockedDevices:'om_blocked_devices',
+  lastUpdated:'om_last_updated'
+};
+
+const THEMES = [
+  {key:'green', label:'Green', color:'#25D366'},
+  {key:'blue', label:'Blue', color:'#3b82f6'},
+  {key:'purple', label:'Purple', color:'#a855f7'},
+  {key:'red', label:'Red', color:'#ef4444'},
+  {key:'orange', label:'Orange', color:'#f97316'},
+  {key:'pink', label:'Pink', color:'#ec4899'},
+  {key:'teal', label:'Teal', color:'#14b8a6'},
+  {key:'gold', label:'Gold', color:'#eab308'},
+  {key:'dark', label:'Pure Dark', color:'#ffffff'},
+  {key:'light', label:'Light', color:'#16a34a'}
+];
+
+/* ===================== STATE ===================== */
+let unlocked = false;
+let editingLinkId = null;
+let deleteTargetId = null;
+
+/* ===================== HELPERS ===================== */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 1800);
+}
+function openModal(id){ document.getElementById(id).classList.add('active'); }
+function closeModal(id){ document.getElementById(id).classList.remove('active'); }
+function uid(){ return 'l'+Date.now()+Math.floor(Math.random()*1000); }
+
+function getLinks(){
+  try{ return JSON.parse(localStorage.getItem(SK.links) || '[]'); }catch(e){ return []; }
+}
+function setLinks(arr){ localStorage.setItem(SK.links, JSON.stringify(arr)); }
+
+function getOrCreateDeviceId(){
+  let id = localStorage.getItem(SK.deviceId);
+  if(!id){
+    id = 'DEV-' + Math.random().toString(36).substring(2,8).toUpperCase() + '-' + Date.now().toString(36).toUpperCase();
+    localStorage.setItem(SK.deviceId, id);
+  }
+  return id;
+}
+function getBlockedDevices(){
+  try{ return JSON.parse(localStorage.getItem(SK.blockedDevices) || '[]'); }catch(e){ return []; }
+}
+function setBlockedDevices(arr){ localStorage.setItem(SK.blockedDevices, JSON.stringify(arr)); }
+
+function applyTheme(){
+  const t = localStorage.getItem(SK.theme) || 'green';
+  document.body.setAttribute('data-theme', t);
+}
+
+/* ===================== INIT / BOOT ===================== */
+function boot(){
+  applyTheme();
+  getOrCreateDeviceId();
+  const yearEl = document.getElementById('about-year');
+  if(yearEl) yearEl.textContent = new Date().getFullYear();
+
+  const setupDone = localStorage.getItem(SK.setupDone);
+
+  // Purane setup-done devices ke liye online version check karo.
+  if(setupDone){
+    showScreen('screen-loading');
+    checkVersionOnlineThenBoot(setupDone);
+    return;
+  }
+
+  showScreen('screen-setup');
+}
+
+function proceedAfterVersionCheck(setupDone){
+  if(!setupDone){
+    showScreen('screen-setup');
+    return;
+  }
+  const lockEnabled = localStorage.getItem(SK.appLockEnabled) !== 'false'; // default true
+  if(lockEnabled){
+    showScreen('screen-lock');
+  } else {
+    unlocked = true;
+    goHome();
+  }
+}
+
+function showOutdatedScreen(latestVersion){
+  const reqVerEl = document.getElementById('maint-required-ver');
+  if(reqVerEl) reqVerEl.textContent = latestVersion || REQUIRED_VERSION;
+  showScreen('screen-maintenance');
+}
+
+function checkVersionOnlineThenBoot(setupDone){
+  // Jab tak check chal rahi hai, ek halka loading state dikhayein
+  // (lock ya maintenance screen abhi nahi dikhana, taake flicker na ho)
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(()=>controller.abort(), 6000); // 6 second timeout
+
+  fetch(VERSION_CHECK_URL, { cache: 'no-store', signal: controller.signal })
+    .then(res => {
+      clearTimeout(timeoutId);
+      if(!res.ok) throw new Error('Version file fetch failed');
+      return res.text();
+    })
+    .then(text => {
+      const latestVersion = text.trim();
+      if(!latestVersion){
+        // Online file khali hai - local fallback check
+        fallbackLocalVersionCheck(setupDone);
+        return;
+      }
+      const savedVersion = localStorage.getItem(SK.version);
+      if(savedVersion !== latestVersion){
+        showOutdatedScreen(latestVersion);
+      } else {
+        proceedAfterVersionCheck(setupDone);
+      }
+    })
+    .catch(() => {
+      clearTimeout(timeoutId);
+      // Internet na ho ya fetch fail ho jaye to local check par fallback karo,
+      // taake genuine users offline hone ki wajah se lock na ho jayein.
+      fallbackLocalVersionCheck(setupDone);
+    });
+}
+
+function fallbackLocalVersionCheck(setupDone){
+  const savedVersion = localStorage.getItem(SK.version);
+  if(savedVersion !== REQUIRED_VERSION){
+    showOutdatedScreen(REQUIRED_VERSION);
+  } else {
+    proceedAfterVersionCheck(setupDone);
+  }
+}
+
+function completeSetup(){
+  const pin = document.getElementById('setup-applock').value.trim();
+  const pass1 = document.getElementById('setup-adminpass').value;
+  const pass2 = document.getElementById('setup-adminpass2').value;
+  const err = document.getElementById('setup-error');
+  err.textContent = '';
+
+  if(pin.length < 4){
+    err.textContent = 'App lock PIN kam se kam 4 digit ka rakhein.';
+    return;
+  }
+  if(pass1.length < 4){
+    err.textContent = 'Admin password kam se kam 4 characters ka rakhein.';
+    return;
+  }
+  if(pass1 !== pass2){
+    err.textContent = 'Admin password match nahi ho raha.';
+    return;
+  }
+
+  localStorage.setItem(SK.appLockPin, pin);
+  localStorage.setItem(SK.adminPass, pass1);
+  localStorage.setItem(SK.appLockEnabled, 'true');
+  localStorage.setItem(SK.version, REQUIRED_VERSION);
+  localStorage.setItem(SK.waLink, '');
+  localStorage.setItem(SK.theme, 'green');
+  localStorage.setItem(SK.userPageOn, 'true');
+  localStorage.setItem(SK.setupDone, 'true');
+  setLinks([]);
+  setBlockedDevices([]);
+
+  applyTheme();
+  unlocked = true;
+  goHome();
+  showToast('Setup mukammal ho gaya ✅');
+}
+
+/* ===================== APP LOCK ===================== */
+function checkAppLock(){
+  const entered = document.getElementById('lock-pin').value.trim();
+  const real = localStorage.getItem(SK.appLockPin);
+  const err = document.getElementById('lock-error');
+  if(entered === real){
+    err.textContent = '';
+    document.getElementById('lock-pin').value = '';
+    unlocked = true;
+    goHome();
+  } else {
+    err.textContent = 'Galat PIN, dobara koshish karein.';
+  }
+}
+
+function toggleAppLock(){
+  const enabled = localStorage.getItem(SK.appLockEnabled) !== 'false';
+  localStorage.setItem(SK.appLockEnabled, enabled ? 'false' : 'true');
+  renderAppLockSwitch();
+  showToast(enabled ? 'App Lock band kar diya gaya' : 'App Lock chalu kar diya gaya');
+}
+function renderAppLockSwitch(){
+  const enabled = localStorage.getItem(SK.appLockEnabled) !== 'false';
+  document.getElementById('applock-switch').classList.toggle('on', enabled);
+}
+
+/* ===================== ADMIN LOGIN ===================== */
+function openAdminEntry(){
+  document.getElementById('adminlogin-pass').value = '';
+  document.getElementById('adminlogin-error').textContent = '';
+  showScreen('screen-adminlogin');
+}
+function checkAdminLogin(){
+  const entered = document.getElementById('adminlogin-pass').value;
+  const real = localStorage.getItem(SK.adminPass);
+  const err = document.getElementById('adminlogin-error');
+  if(entered === real){
+    err.textContent = '';
+    document.getElementById('adminlogin-pass').value = '';
+    openAdminDashboard();
+  } else {
+    err.textContent = 'Galat admin password.';
+  }
+}
+function adminLogout(){
+  goHome();
+}
+
+/* ===================== HOME ===================== */
+function goHome(){
+  if(!unlocked){
+    boot();
+    return;
+  }
+
+  // Check blocked device
+  const myId = getOrCreateDeviceId();
+  const blocked = getBlockedDevices();
+  if(blocked.includes(myId)){
+    showScreen('screen-maintenance');
+    return;
+  }
+
+  // Check maintenance/user-page toggle
+  const userPageOn = localStorage.getItem(SK.userPageOn) !== 'false';
+  if(!userPageOn){
+    showScreen('screen-maintenance');
+    return;
+  }
+
+  showScreen('screen-home');
+  document.getElementById('home-title').textContent = 'OWNER MUZAKIR';
+  document.getElementById('home-ver').textContent = localStorage.getItem(SK.version) || 'v1.0';
+
+  const lastUpd = localStorage.getItem(SK.lastUpdated);
+  const lastUpdEl = document.getElementById('last-updated-line');
+  if(lastUpdEl){
+    lastUpdEl.textContent = lastUpd ? ('Last updated: ' + new Date(parseInt(lastUpd)).toLocaleDateString()) : '';
+  }
+
+  const pic = localStorage.getItem(SK.adminPic);
+  const picEl = document.getElementById('home-admin-pic');
+  if(pic){
+    picEl.src = pic;
+    picEl.style.display = 'inline-block';
+  } else {
+    picEl.style.display = 'none';
+  }
+
+  renderCategoryPills();
+  renderHomeLinks();
+}
+
+let activeCategory = 'all';
+
+function renderCategoryPills(){
+  const links = getLinks();
+  const cats = ['all', ...new Set(links.map(l=>l.category).filter(Boolean))];
+  const container = document.getElementById('category-pills');
+  if(cats.length <= 1){
+    container.innerHTML = '';
+    container.style.display = 'none';
+    return;
+  }
+  container.style.display = 'flex';
+  container.innerHTML = '';
+  cats.forEach(c=>{
+    const pill = document.createElement('div');
+    pill.className = 'pill' + (activeCategory===c ? ' active' : '');
+    pill.textContent = c === 'all' ? 'Sab' : c;
+    pill.onclick = ()=>{ activeCategory = c; renderCategoryPills(); renderHomeLinks(); };
+    container.appendChild(pill);
+  });
+}
+
+function renderHomeLinks(){
+  const allLinks = getLinks();
+  const container = document.getElementById('links-container');
+  const empty = document.getElementById('empty-state');
+  container.innerHTML = '';
+
+  const searchEl = document.getElementById('search-input');
+  const query = (searchEl ? searchEl.value : '').trim().toLowerCase();
+
+  let links = allLinks;
+  if(activeCategory !== 'all'){
+    links = links.filter(l => l.category === activeCategory);
+  }
+  if(query){
+    links = links.filter(l =>
+      l.title.toLowerCase().includes(query) ||
+      l.url.toLowerCase().includes(query) ||
+      (l.category || '').toLowerCase().includes(query)
+    );
+  }
+
+  if(allLinks.length === 0){
+    empty.style.display = 'block';
+    empty.innerHTML = `<span class="e-icon">📭</span>Koi link abhi add nahi hui<br>Admin dashboard se add karein`;
+    return;
+  }
+  if(links.length === 0){
+    empty.style.display = 'block';
+    empty.innerHTML = `<span class="e-icon">🔍</span>Kuch nahi mila`;
+    return;
+  }
+  empty.style.display = 'none';
+
+  links.forEach(l=>{
+    const div = document.createElement('div');
+    div.className = 'link-item';
+    div.onclick = (e)=>{
+      if(e.target.closest('.mini-btn')) return;
+      window.open(l.url, '_blank');
+    };
+    const catTag = l.category ? `<span class="link-tag">${escapeHtml(l.category)}</span>` : '';
+    div.innerHTML = `
+      <img src="${l.img || ''}" onerror="this.style.display='none'">
+      <div class="info">
+        <b>${escapeHtml(l.title)}</b>
+        <span>${escapeHtml(l.url)}</span>
+        ${catTag}
+      </div>
+      <div class="link-actions-mini">
+        <button class="mini-btn" title="Copy link" onclick="copyLinkUrl('${l.id}')">📋</button>
+        <button class="mini-btn" title="Share" onclick="shareLink('${l.id}')">↗</button>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function copyLinkUrl(id){
+  const l = getLinks().find(x=>x.id===id);
+  if(!l) return;
+  navigator.clipboard.writeText(l.url).then(()=>{
+    showToast('Link copy ho gaya 📋');
+  }).catch(()=>{
+    showToast('Copy nahi ho saka');
+  });
+}
+
+function shareLink(id){
+  const l = getLinks().find(x=>x.id===id);
+  if(!l) return;
+  if(navigator.share){
+    navigator.share({ title: l.title, url: l.url }).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(l.url).then(()=>showToast('Share supported nahi, link copy ho gaya 📋'));
+  }
+}
+
+function escapeHtml(str){
+  const d = document.createElement('div');
+  d.textContent = str || '';
+  return d.innerHTML;
+}
+
+function openWhatsApp(){
+  const link = localStorage.getItem(SK.waLink);
+  if(link){
+    window.open(link, '_blank');
+  } else {
+    showToast('WhatsApp link abhi set nahi hua hai');
+  }
+}
+
+/* ===================== ADMIN DASHBOARD ===================== */
+function openAdminDashboard(){
+  showScreen('screen-admin');
+  const pic = localStorage.getItem(SK.adminPic);
+  document.getElementById('admin-pic-preview').src = pic || makePlaceholder();
+  document.getElementById('settings-ver-val').textContent = localStorage.getItem(SK.version) || 'v1.0';
+  renderAppLockSwitch();
+  renderAdminLinks();
+  renderThemeLabel();
+  renderUserPageSwitch();
+  document.getElementById('my-device-id').textContent = getOrCreateDeviceId();
+  renderBlockedList();
+}
+
+function renderThemeLabel(){
+  const key = localStorage.getItem(SK.theme) || 'green';
+  const t = THEMES.find(x=>x.key===key);
+  document.getElementById('settings-theme-val').textContent = t ? t.label : 'Green';
+}
+
+function renderUserPageSwitch(){
+  const on = localStorage.getItem(SK.userPageOn) !== 'false';
+  document.getElementById('userpage-switch').classList.toggle('on', on);
+  document.getElementById('userpage-status').textContent = on ? '(ON)' : '(OFF)';
+  document.getElementById('userpage-ic').textContent = on ? '🟢' : '🔴';
+}
+
+function toggleUserPage(){
+  const on = localStorage.getItem(SK.userPageOn) !== 'false';
+  localStorage.setItem(SK.userPageOn, on ? 'false' : 'true');
+  renderUserPageSwitch();
+  showToast(on ? 'User Page OFF kar diya gaya 🔴' : 'User Page ON kar diya gaya 🟢');
+}
+
+function makePlaceholder(){
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="#20242d"/><text x="50" y="58" font-size="40" text-anchor="middle" fill="#9aa0a8">👤</text></svg>`
+  );
+}
+
+function handleAdminPicUpload(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    localStorage.setItem(SK.adminPic, ev.target.result);
+    document.getElementById('admin-pic-preview').src = ev.target.result;
+    showToast('Admin photo update ho gayi ✅');
+  };
+  reader.readAsDataURL(file);
+}
+
+function renderAdminLinks(){
+  const links = getLinks();
+  const container = document.getElementById('admin-links-container');
+  container.innerHTML = '';
+
+  if(links.length === 0){
+    container.innerHTML = '<div class="empty-state">Abhi koi link nahi hai</div>';
+    return;
+  }
+
+  links.forEach(l=>{
+    const div = document.createElement('div');
+    div.className = 'admin-link-item';
+    const catTag = l.category ? `<span class="link-tag">${escapeHtml(l.category)}</span>` : '';
+    div.innerHTML = `
+      <img src="${l.img || ''}" onerror="this.style.display='none'">
+      <div class="info">
+        <b>${escapeHtml(l.title)}</b>
+        <span>${escapeHtml(l.url)}</span>
+        ${catTag}
+      </div>
+      <div class="acts">
+        <button class="icon-action" onclick="editLink('${l.id}')">✎</button>
+        <button class="icon-action del" onclick="askDeleteLink('${l.id}')">🗑</button>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+/* ---- Link modal ---- */
+let tempLinkImg = '';
+
+function openLinkModal(){
+  editingLinkId = null;
+  tempLinkImg = '';
+  document.getElementById('link-modal-title').textContent = 'Naya Link Add Karein';
+  document.getElementById('link-title-input').value = '';
+  document.getElementById('link-url-input').value = '';
+  document.getElementById('link-category-input').value = '';
+  document.getElementById('link-img-preview').src = makePlaceholder();
+  document.getElementById('link-modal-error').textContent = '';
+  openModal('modal-link');
+}
+
+function editLink(id){
+  const links = getLinks();
+  const l = links.find(x=>x.id===id);
+  if(!l) return;
+  editingLinkId = id;
+  tempLinkImg = l.img || '';
+  document.getElementById('link-modal-title').textContent = 'Link Edit Karein';
+  document.getElementById('link-title-input').value = l.title;
+  document.getElementById('link-url-input').value = l.url;
+  document.getElementById('link-category-input').value = l.category || '';
+  document.getElementById('link-img-preview').src = l.img || makePlaceholder();
+  document.getElementById('link-modal-error').textContent = '';
+  openModal('modal-link');
+}
+
+function handleLinkImgUpload(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    tempLinkImg = ev.target.result;
+    document.getElementById('link-img-preview').src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveLink(){
+  const title = document.getElementById('link-title-input').value.trim();
+  const url = document.getElementById('link-url-input').value.trim();
+  const category = document.getElementById('link-category-input').value.trim();
+  const err = document.getElementById('link-modal-error');
+
+  if(!title){ err.textContent = 'Title likhna zaroori hai.'; return; }
+  if(!url){ err.textContent = 'Link/URL likhna zaroori hai.'; return; }
+
+  let links = getLinks();
+  const now = Date.now();
+
+  if(editingLinkId){
+    links = links.map(l => l.id === editingLinkId ? {...l, title, url, category, img: tempLinkImg, updatedAt: now} : l);
+  } else {
+    links.push({ id: uid(), title, url, category, img: tempLinkImg, updatedAt: now, createdAt: now });
+  }
+  setLinks(links);
+  localStorage.setItem(SK.lastUpdated, String(now));
+  closeModal('modal-link');
+  renderAdminLinks();
+  showToast('Link save ho gaya ✅');
+}
+
+function askDeleteLink(id){
+  deleteTargetId = id;
+  openModal('modal-confirm-delete');
+}
+function confirmDeleteLink(){
+  let links = getLinks();
+  links = links.filter(l => l.id !== deleteTargetId);
+  setLinks(links);
+  closeModal('modal-confirm-delete');
+  renderAdminLinks();
+  showToast('Link delete ho gaya 🗑');
+}
+
+/* ---- Version modal ---- */
+function openVersionModal(){
+  document.getElementById('version-input').value = localStorage.getItem(SK.version) || 'v1.0';
+  openModal('modal-version');
+}
+function saveVersion(){
+  const v = document.getElementById('version-input').value.trim();
+  if(!v){ showToast('Version khali nahi ho sakta'); return; }
+  localStorage.setItem(SK.version, v);
+  document.getElementById('settings-ver-val').textContent = v;
+  const homeVerEl = document.getElementById('home-ver');
+  if(homeVerEl) homeVerEl.textContent = v;
+  closeModal('modal-version');
+  showToast('Version update ho gaya ✅');
+}
+
+/* ---- WhatsApp link modal ---- */
+function openWhatsAppLinkModal(){
+  document.getElementById('wa-input').value = localStorage.getItem(SK.waLink) || '';
+  openModal('modal-wa');
+}
+function saveWhatsApp(){
+  const v = document.getElementById('wa-input').value.trim();
+  localStorage.setItem(SK.waLink, v);
+  closeModal('modal-wa');
+  showToast('WhatsApp link save ho gaya ✅');
+}
+
+/* ---- PIN change modal ---- */
+function openChangePinModal(){
+  document.getElementById('newpin-input').value = '';
+  document.getElementById('pin-modal-error').textContent = '';
+  openModal('modal-pin');
+}
+function saveNewPin(){
+  const v = document.getElementById('newpin-input').value.trim();
+  const err = document.getElementById('pin-modal-error');
+  if(v.length < 4){ err.textContent = 'PIN kam se kam 4 digit ka ho.'; return; }
+  localStorage.setItem(SK.appLockPin, v);
+  closeModal('modal-pin');
+  showToast('App Lock PIN change ho gaya ✅');
+}
+
+/* ---- Admin password change modal ---- */
+function openChangeAdminPassModal(){
+  document.getElementById('newadminpass-input').value = '';
+  document.getElementById('adminpass-modal-error').textContent = '';
+  openModal('modal-adminpass');
+}
+function saveNewAdminPass(){
+  const v = document.getElementById('newadminpass-input').value;
+  const err = document.getElementById('adminpass-modal-error');
+  if(v.length < 4){ err.textContent = 'Password kam se kam 4 characters ka ho.'; return; }
+  localStorage.setItem(SK.adminPass, v);
+  closeModal('modal-adminpass');
+  showToast('Admin password change ho gaya ✅');
+}
+
+/* ---- Theme modal ---- */
+function openThemeModal(){
+  const grid = document.getElementById('theme-grid');
+  const current = localStorage.getItem(SK.theme) || 'green';
+  grid.innerHTML = '';
+  THEMES.forEach(t=>{
+    const div = document.createElement('div');
+    div.style.cssText = `border:2px solid ${t.key===current ? 'var(--accent)' : 'var(--border)'};border-radius:12px;padding:12px;text-align:center;cursor:pointer;background:var(--card2);`;
+    div.onclick = ()=>{ selectTheme(t.key); };
+    div.innerHTML = `
+      <div style="width:32px;height:32px;border-radius:50%;background:${t.color};margin:0 auto 8px;border:2px solid var(--border);"></div>
+      <div style="font-size:12px;">${t.label}</div>
+    `;
+    grid.appendChild(div);
+  });
+  openModal('modal-theme');
+}
+function selectTheme(key){
+  localStorage.setItem(SK.theme, key);
+  applyTheme();
+  renderThemeLabel();
+  closeModal('modal-theme');
+  showToast('Theme change ho gaya 🎨');
+}
+
+/* ---- Block device modal ---- */
+function openBlockModal(){
+  document.getElementById('block-id-input').value = '';
+  document.getElementById('block-modal-error').textContent = '';
+  openModal('modal-block');
+}
+function saveBlockDevice(){
+  const id = document.getElementById('block-id-input').value.trim();
+  const err = document.getElementById('block-modal-error');
+  if(!id){ err.textContent = 'Device ID likhein.'; return; }
+  let blocked = getBlockedDevices();
+  if(blocked.includes(id)){ err.textContent = 'Ye device pehle se blocked hai.'; return; }
+  blocked.push(id);
+  setBlockedDevices(blocked);
+  closeModal('modal-block');
+  renderBlockedList();
+  showToast('Device block ho gaya 🚫');
+}
+function unblockDevice(id){
+  let blocked = getBlockedDevices();
+  blocked = blocked.filter(x=>x!==id);
+  setBlockedDevices(blocked);
+  renderBlockedList();
+  showToast('Device unblock ho gaya ✅');
+}
+function renderBlockedList(){
+  const blocked = getBlockedDevices();
+  const container = document.getElementById('blocked-list-container');
+  if(blocked.length === 0){
+    container.innerHTML = '<div style="color:var(--muted);font-size:12.5px;padding:10px 2px;">Koi device blocked nahi hai</div>';
+    return;
+  }
+  container.innerHTML = '';
+  blocked.forEach(id=>{
+    const div = document.createElement('div');
+    div.className = 'settings-row';
+    div.style.cursor = 'default';
+    div.innerHTML = `
+      <div class="l" style="font-size:12.5px;word-break:break-all;">🚫 ${escapeHtml(id)}</div>
+      <button class="icon-action del" onclick="unblockDevice('${id}')" style="flex-shrink:0;">↺</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+/* ---- Reset everything ---- */
+function confirmResetApp(){
+  openModal('modal-confirm-reset');
+}
+function resetApp(){
+  localStorage.clear();
+  closeModal('modal-confirm-reset');
+  unlocked = false;
+  boot();
+  showToast('Sab data reset ho gaya');
+}
+
+/* ===================== START ===================== */
+/* ===================== RE-LOCK ON MINIMIZE ===================== */
+document.addEventListener('visibilitychange', function(){
+  if(document.hidden){
+    // App ja raha hai background mein - agar lock enabled hai to unlock state reset karo
+    const setupDone = localStorage.getItem(SK.setupDone);
+    const lockEnabled = localStorage.getItem(SK.appLockEnabled) !== 'false';
+    if(setupDone && lockEnabled){
+      unlocked = false;
+    }
+  } else {
+    // App wapas foreground mein aaya
+    const setupDone = localStorage.getItem(SK.setupDone);
+    const lockEnabled = localStorage.getItem(SK.appLockEnabled) !== 'false';
+    if(setupDone && lockEnabled && !unlocked){
+      document.getElementById('lock-pin').value = '';
+      document.getElementById('lock-error').textContent = '';
+      showScreen('screen-lock');
+    }
+  }
+});
+
+window.onload = boot;
+</script>
+</body>
+</html>
